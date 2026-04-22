@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-export default function AdminAlbumsPage() {
+export default function PhotographerAlbumsPage() {
   const dummyAlbums = [
     { id: "alb-1", name: "Rahul & Simran Wedding", date: "April 10, 2026", photos: 450, status: "Published" },
     { id: "alb-2", name: "Aditya Pre-Wedding", date: "March 22, 2026", photos: 125, status: "Draft" },
@@ -24,7 +24,7 @@ export default function AdminAlbumsPage() {
           <p className="text-muted-foreground mt-1">Organize and manage your studio photography albums.</p>
         </div>
         <div className="flex gap-3">
-          <Link href="/admin/albums/new">
+          <Link href="/photographer/albums/new">
             <Button className="gap-2">
               <Plus className="h-4 w-4" />
               Create New Album
@@ -72,7 +72,7 @@ export default function AdminAlbumsPage() {
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                      <Link href={`/admin/albums/${album.id}`} className="font-semibold text-foreground hover:underline">
+                      <Link href={`/photographer/albums/${album.id}`} className="font-semibold text-foreground hover:underline">
                         {album.name}
                       </Link>
                       <span className="text-sm text-muted-foreground">{album.date}</span>
@@ -97,7 +97,7 @@ export default function AdminAlbumsPage() {
                         <LinkIcon className="h-3.5 w-3.5" />
                         Share
                       </Button>
-                      <Link href={`/admin/albums/${album.id}`}>
+                      <Link href={`/photographer/albums/${album.id}`}>
                         <Button size="sm" className="h-8">
                           Manage
                         </Button>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { Toaster } from "@/components/ui/sonner"
+import { ThemeProvider } from "next-themes";
 const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
@@ -18,11 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} h-full antialiased`}
-    >
-      <body className="font-sans min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <body className="font-sans min-h-full flex flex-col">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+
+        <main>
+          {children}
+        </main>
+        </ThemeProvider>
+        <Toaster />
+      </body>
     </html>
   );
 }
