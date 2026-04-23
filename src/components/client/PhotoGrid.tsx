@@ -1,7 +1,7 @@
 "use client";
 
-import { Photo } from "@/types/photo";
 import { useState } from "react";
+import { Photo } from "@/types/photo";
 import PreviewModal from "./PreviewModal";
 import PhotoCard from "./PhotoCard";
 
@@ -14,7 +14,7 @@ export default function PhotoGrid({ photos }: Props) {
 
   if (photos.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
+      <div className="rounded-xl border border-dashed p-8 text-center text-sm text-muted-foreground">
         No photos are available yet.
       </div>
     );
@@ -22,7 +22,7 @@ export default function PhotoGrid({ photos }: Props) {
 
   return (
     <>
-      <div className="columns-1 w-full gap-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
+      <div className="columns-1 w-full gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
         {photos.map((photo) => (
           <div key={photo.id} className="mb-4 break-inside-avoid">
             <PhotoCard photo={photo} onPreview={setPreview} />
