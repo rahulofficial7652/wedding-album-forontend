@@ -24,7 +24,7 @@ export default function PhotographerAlbumsPage() {
           <p className="text-muted-foreground mt-1">Organize and manage your studio photography albums.</p>
         </div>
         <div className="flex gap-3">
-          <Link href="/photographer/albums/new">
+          <Link href="/dashboard/albums/new">
             <Button className="gap-2">
               <Plus className="h-4 w-4" />
               Create New Album
@@ -72,7 +72,7 @@ export default function PhotographerAlbumsPage() {
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">
-                      <Link href={`/photographer/albums/${album.id}`} className="font-semibold text-foreground hover:underline">
+                      <Link href={`/dashboard/albums/${album.id}`} className="font-semibold text-foreground hover:underline">
                         {album.name}
                       </Link>
                       <span className="text-sm text-muted-foreground">{album.date}</span>
@@ -97,7 +97,7 @@ export default function PhotographerAlbumsPage() {
                         <LinkIcon className="h-3.5 w-3.5" />
                         Share
                       </Button>
-                      <Link href={`/photographer/albums/${album.id}`}>
+                      <Link href={`/dashboard/albums/${album.id}`}>
                         <Button size="sm" className="h-8">
                           Manage
                         </Button>

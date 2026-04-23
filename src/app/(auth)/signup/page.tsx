@@ -32,7 +32,7 @@ export default function SignupPage() {
   const handleSignup = async () => {
     try {
       await signup(register);
-      router.push("/photographer");
+      router.push("/dashboard");
       toast.success("Account created successfully!");
     } catch (error :any) {
 const message = error?.response.data.message || "Something went wrong";

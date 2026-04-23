@@ -46,7 +46,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12 text-foreground">
       <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-        <Link href="/photographer/albums" className="hover:text-foreground transition-colors flex items-center gap-1">
+        <Link href="/dashboard/albums" className="hover:text-foreground transition-colors flex items-center gap-1">
           <ArrowLeft className="h-3 w-3" /> Back to Albums
         </Link>
       </div>

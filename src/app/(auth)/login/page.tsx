@@ -31,7 +31,7 @@ export default function LoginPage() {
   const handleLogin = async () => {
     try {
       await login(form);
-      router.push("/photographer");
+      router.push("/dashboard");
       toast.success("Login successful!");
     } catch (error) {
       console.error("Login failed:", error);
