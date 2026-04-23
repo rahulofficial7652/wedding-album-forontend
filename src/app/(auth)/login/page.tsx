@@ -86,7 +86,7 @@ export default function LoginPage() {
                     <Button type="submit">Login</Button>
 
                     <FieldDescription className="text-center">
-                      Don't have an account?
+                      Do not have an account?
                       <Link href="/signup" className="ml-1 underline">
                         Sign Up
                       </Link>

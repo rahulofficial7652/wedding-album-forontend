@@ -12,11 +12,19 @@ interface Props {
 export default function PhotoGrid({ photos }: Props) {
   const [preview, setPreview] = useState<Photo | null>(null);
 
+  if (photos.length === 0) {
+    return (
+      <div className="rounded-lg border border-dashed p-8 text-center text-sm text-muted-foreground">
+        No photos are available yet.
+      </div>
+    );
+  }
+
   return (
     <>
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-4 w-full">
+      <div className="columns-1 w-full gap-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
         {photos.map((photo) => (
-          <div key={photo.id} className="break-inside-avoid mb-4">
+          <div key={photo.id} className="mb-4 break-inside-avoid">
             <PhotoCard photo={photo} onPreview={setPreview} />
           </div>
         ))}

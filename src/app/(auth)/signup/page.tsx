@@ -34,9 +34,15 @@ export default function SignupPage() {
       await signup(register);
       router.push("/dashboard");
       toast.success("Account created successfully!");
-    } catch (error :any) {
-const message = error?.response.data.message || "Something went wrong";
-toast.error(message);
+    } catch (error: unknown) {
+      const message =
+        typeof error === "object" &&
+        error !== null &&
+        "response" in error &&
+        typeof (error as { response?: { data?: { message?: string } } }).response?.data?.message === "string"
+          ? (error as { response: { data: { message: string } } }).response.data.message
+          : "Something went wrong";
+      toast.error(message);
     }
   };
 
