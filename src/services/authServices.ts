@@ -1,8 +1,14 @@
 import api from "@/lib/axiosApi";
 
-export const signup = (data: any) => api.post("/auth/signup", data);
+interface AuthPayload {
+  email: string;
+  password: string;
+  name?: string;
+}
 
-export const login = (data : any) => api.post("/auth/login", data);
+export const signup = (data: AuthPayload) => api.post("/auth/signup", data);
+
+export const login = (data: AuthPayload) => api.post("/auth/login", data);
 
 export const logout = () => api.post("/auth/logout");
 
