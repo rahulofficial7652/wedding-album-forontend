@@ -1,12 +1,8 @@
-// components/client/PreviewModal.tsx
 "use client";
 
-import {
-  Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
 import Image from "next/image";
 import { Photo } from "@/types/photo";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import CommentInput from "./CommentInput";
 
 interface Props {
@@ -19,21 +15,21 @@ export default function PreviewModal({ photo, onClose }: Props) {
 
   return (
     <Dialog open={!!photo} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl p-0">
+      <DialogContent className="max-h-[92vh] max-w-4xl overflow-y-auto p-0">
         <div className="flex flex-col">
           <Image
             src={photo.url}
             alt={photo.alt}
             width={1000}
             height={800}
-            className="w-full h-auto object-contain"
+            className="h-auto w-full object-contain"
           />
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-2">{photo.title}</h3>
+          <div className="space-y-2 p-4">
+            <h3 className="text-base font-semibold sm:text-lg">{photo.title}</h3>
             <CommentInput photoId={photo.id} />
           </div>
         </div>
       </DialogContent>
     </Dialog>
   );
-}   
+}

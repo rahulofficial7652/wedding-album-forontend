@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useSelectionStore } from "@/store/useSelectionStore";
 
 export default function SelectionBar() {
@@ -10,9 +11,9 @@ export default function SelectionBar() {
   }
 
   return (
-    <div className="fixed bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-4 rounded-xl bg-black px-6 py-3 text-white">
-      <span>{selected.size} selected</span>
-      <button className="rounded bg-green-500 px-4 py-1">Submit</button>
+    <div className="fixed inset-x-4 bottom-4 z-20 mx-auto flex max-w-md items-center justify-between rounded-xl border bg-background/95 px-4 py-3 shadow-lg backdrop-blur">
+      <span className="text-sm font-medium">{selected.size} selected</span>
+      <Button size="sm">Submit</Button>
     </div>
   );
 }

@@ -2,11 +2,32 @@
 
 import { use, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Check, Copy, ExternalLink, Link as LinkIcon, UploadCloud } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  Copy,
+  ExternalLink,
+  Link as LinkIcon,
+  UploadCloud,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -48,15 +69,18 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
   return (
     <div className="mx-auto max-w-6xl space-y-6 pb-12 text-foreground">
       <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href="/dashboard/albums" className="flex items-center gap-1 transition-colors hover:text-foreground">
+        <Link
+          href="/dashboard/albums"
+          className="flex items-center gap-1 transition-colors hover:text-foreground"
+        >
           <ArrowLeft className="h-3 w-3" /> Back to Albums
         </Link>
       </div>
 
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{albumTitle}</h1>
-          <p className="mt-1 text-muted-foreground">
+          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">{albumTitle}</h1>
+          <p className="mt-1 text-sm text-muted-foreground sm:text-base">
             {isNew
               ? "Set up your new album project."
               : "Manage photos, delivery options, and client access."}
@@ -64,7 +88,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
         </div>
 
         {!isNew ? (
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" className="gap-2">
@@ -79,7 +103,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
                     Anyone with this link can access the client selection view.
                   </DialogDescription>
                 </DialogHeader>
-                <div className="mt-4 flex items-center space-x-2">
+                <div className="mt-4 flex items-center gap-2">
                   <div className="grid flex-1 gap-2">
                     <Label htmlFor="link" className="sr-only">
                       Link
@@ -119,7 +143,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
       </div>
 
       <Tabs defaultValue="photos" className="mt-6 w-full">
-        <TabsList className="mb-6">
+        <TabsList className="mb-6 w-full justify-start overflow-x-auto sm:w-auto">
           <TabsTrigger value="photos">Photos ({photos.length})</TabsTrigger>
           <TabsTrigger value="settings">Album Settings</TabsTrigger>
           <TabsTrigger value="security">Security & Access</TabsTrigger>
@@ -128,7 +152,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
         <TabsContent value="photos" className="space-y-6">
           {!isNew ? (
             <Card>
-              <CardContent className="p-12 text-center">
+              <CardContent className="p-8 text-center sm:p-12">
                 <p className="text-sm text-muted-foreground">
                   No photos uploaded yet. Use <span className="font-medium">Upload Photos</span> to begin.
                 </p>
@@ -146,7 +170,11 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Album Name</Label>
-                <Input id="name" defaultValue={isNew ? "" : `Album ${id}`} placeholder="e.g. Rahul & Simran Wedding" />
+                <Input
+                  id="name"
+                  defaultValue={isNew ? "" : `Album ${id}`}
+                  placeholder="e.g. Rahul & Simran Wedding"
+                />
               </div>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
@@ -158,7 +186,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
                   <Input id="client" type="email" placeholder="client@example.com" />
                 </div>
               </div>
-              <Button className="mt-4">{isNew ? "Create Album" : "Save Changes"}</Button>
+              <Button className="mt-4 w-full sm:w-auto">{isNew ? "Create Album" : "Save Changes"}</Button>
             </CardContent>
           </Card>
         </TabsContent>
@@ -170,7 +198,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
               <CardDescription>Control who can access and download these photos.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="flex items-center justify-between py-2">
+              <div className="flex flex-col justify-between gap-4 py-2 sm:flex-row sm:items-center">
                 <div>
                   <h4 className="text-sm font-medium">Download PIN</h4>
                   <p className="mt-1 text-xs text-muted-foreground">
@@ -183,14 +211,14 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
                 </div>
               </div>
               <Separator />
-              <div className="flex items-center justify-between py-2">
+              <div className="flex flex-col justify-between gap-3 py-2 sm:flex-row sm:items-center">
                 <div>
                   <h4 className="text-sm font-medium">Client Selection Box</h4>
                   <p className="mt-1 text-xs text-muted-foreground">
                     Allow clients to select photos for final delivery.
                   </p>
                 </div>
-                <Button variant="secondary">Active</Button>
+                <Button variant="secondary" className="sm:w-auto">Active</Button>
               </div>
             </CardContent>
           </Card>

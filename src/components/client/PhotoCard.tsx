@@ -1,10 +1,10 @@
-// components/client/PhotoCard.tsx
 "use client";
 
 import Image from "next/image";
-import { useSelectionStore } from "@/store/useSelectionStore";
 import { Check } from "lucide-react";
 import { Photo } from "@/types/photo";
+import { useSelectionStore } from "@/store/useSelectionStore";
+import { Button } from "@/components/ui/button";
 import CommentInput from "./CommentInput";
 
 interface Props {
@@ -17,39 +17,37 @@ export default function PhotoCard({ photo, onPreview }: Props) {
   const isSelected = useSelectionStore((s) => s.isSelected(photo.id));
 
   return (
-    <div className="relative group cursor-pointer bg-white rounded-lg shadow-md overflow-hidden">
-      <div onClick={() => toggle(photo.id)}>
+    <div className="group relative overflow-hidden rounded-xl border bg-card shadow-xs transition hover:shadow-md">
+      <div onClick={() => toggle(photo.id)} className="relative cursor-pointer">
         <Image
           src={photo.thumbnailUrl}
           alt={photo.alt}
           width={photo.width}
           height={photo.height}
-          className="w-full h-auto"
+          className="h-auto w-full"
         />
 
-        {/* Overlay */}
-        
-
-        {/* Selected */}
         {isSelected && (
-          <div className="absolute top-2 right-2 bg-green-500 p-1 rounded-full">
-            <Check className="text-white w-4 h-4" />
+          <div className="absolute right-2 top-2 rounded-full bg-primary p-1 text-primary-foreground shadow-sm">
+            <Check className="h-4 w-4" />
           </div>
         )}
 
-        {/* Preview Button */}
-        <button
+        <Button
+          type="button"
+          size="xs"
+          variant="secondary"
           onClick={(e) => {
             e.stopPropagation();
             onPreview(photo);
           }}
-          className="absolute bottom-15 left-2 text-xs bg-white px-2 py-1 rounded opacity-0 group-hover:opacity-100"
+          className="absolute bottom-2 left-2 opacity-0 transition-opacity group-hover:opacity-100"
         >
           View
-        </button>
+        </Button>
       </div>
 
-      <div className="p-2 ">
+      <div className="p-2">
         <CommentInput photoId={photo.id} />
       </div>
     </div>
