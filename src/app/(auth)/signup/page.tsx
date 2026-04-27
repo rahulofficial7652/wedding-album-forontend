@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { apiMessage } from "@/lib/utils";
 import { signup } from "@/services/authServices";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,18 +27,15 @@ export default function SignupPage() {
 
   const handleSignup = async () => {
     try {
-      await signup(register);
+      const res = await signup(register);
+      const token = res.data?.token || res.data?.accessToken || res.data?.data?.token;
+      if (token) {
+        document.cookie = `token=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // 7 days
+      }
       router.push("/dashboard");
-      toast.success("Account created successfully!");
-    } catch (error: unknown) {
-      const message =
-        typeof error === "object" &&
-        error !== null &&
-        "response" in error &&
-        typeof (error as { response?: { data?: { message?: string } } }).response?.data?.message === "string"
-          ? (error as { response: { data: { message: string } } }).response.data.message
-          : "Something went wrong";
-      toast.error(message);
+      toast.success(apiMessage(res, "Account created successfully!"));
+    } catch (error) {
+      toast.error(apiMessage(error, "Something went wrong"));
     }
   };
 

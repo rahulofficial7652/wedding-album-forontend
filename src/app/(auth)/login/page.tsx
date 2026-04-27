@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { apiMessage } from "@/lib/utils";
 import { login } from "@/services/authServices";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+
 export default function LoginPage() {
   const router = useRouter();
 
@@ -26,12 +28,16 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      await login(form);
+      const res = await login(form);
+      const token = res.data?.token || res.data?.accessToken || res.data?.data?.token;
+      if (token) {
+        document.cookie = `token=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // 7 days
+      }
       router.push("/dashboard");
-      toast.success("Login successful!");
+      toast.success(apiMessage(res, "Login successful!"));
     } catch (error) {
       console.error("Login failed:", error);
-      toast.error("Login failed. Please check your credentials and try again.");
+      toast.error(apiMessage(error, "Login failed. Please check your credentials and try again."));
     }
   };
 

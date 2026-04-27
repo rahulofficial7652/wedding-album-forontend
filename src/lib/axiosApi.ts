@@ -1,35 +1,31 @@
-import axios from 'axios';
+import axios from "axios";
 
-// Instance create karein
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1',
-  timeout: 10000, // 10 seconds baad request cancel ho jayegi
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api/v1",
+  timeout: 10000,
+  headers: { "Content-Type": "application/json" },
 });
 
-// Interceptors (Request): Request bhejne se pehle kuch add karna (e.g., Auth Token)
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token'); // Ya cookies se lein
+api.interceptors.request.use((config) => {
+  if (typeof document !== "undefined") {
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      ?.split("=")[1];
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
   }
-);
+  return config;
+});
 
-// Interceptors (Response): Response milne ke baad global error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Logout logic ya redirect to login
-      console.error("Unauthorized! Redirecting...");
+      // Clear stale cookie and redirect to login
+      document.cookie = "token=; path=/; max-age=0";
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   }
