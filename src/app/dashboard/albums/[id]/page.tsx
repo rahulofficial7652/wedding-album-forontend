@@ -90,7 +90,7 @@ export default function AlbumManagementPage({ params }: { params: Promise<{ id: 
         {!isNew ? (
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
             <Dialog>
-              <DialogTrigger asChild>
+              <DialogTrigger asChild> 
                 <Button variant="outline" className="gap-2">
                   <LinkIcon className="h-4 w-4" />
                   Share Album

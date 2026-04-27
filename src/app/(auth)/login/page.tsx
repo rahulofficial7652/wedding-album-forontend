@@ -13,8 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -48,40 +48,38 @@ export default function LoginPage() {
           <CardDescription>Enter your email below to sign in to your account</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit}>
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="youremail@example.com"
-                  required
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Input
-                  id="password"
-                  type="password"
-                  required
-                  placeholder="Enter your password"
-                  onChange={(e) => setForm({ ...form, password: e.target.value })}
-                />
-              </Field>
-              <Field>
-                <Button type="submit" className="w-full">
-                  Login
-                </Button>
-                <FieldDescription className="text-center">
-                  Do not have an account?
-                  <Link href="/signup" className="ml-1 underline underline-offset-4">
-                    Sign Up
-                  </Link>
-                </FieldDescription>
-              </Field>
-            </FieldGroup>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="youremail@example.com"
+                required
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                required
+                placeholder="Enter your password"
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+              />
+            </div>
+            <div className="flex flex-col gap-3">
+              <Button type="submit" className="w-full">
+                Login
+              </Button>
+              <p className="text-center text-sm text-muted-foreground">
+                Do not have an account?{" "}
+                <Link href="/signup" className="underline underline-offset-4 hover:text-primary">
+                  Sign Up
+                </Link>
+              </p>
+            </div>
           </form>
         </CardContent>
       </Card>

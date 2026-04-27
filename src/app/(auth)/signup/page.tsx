@@ -13,8 +13,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -55,60 +55,60 @@ export default function SignupPage() {
                 e.preventDefault();
                 handleSignup();
               }}
+              className="flex flex-col gap-5"
             >
-              <FieldGroup>
-                <Field>
-                  <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    required
-                    onChange={(e) => setRegister({ ...register, name: e.target.value })}
-                  />
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="email">Email</FieldLabel>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="youremail@example.com"
-                    required
-                    onChange={(e) => setRegister({ ...register, email: e.target.value })}
-                  />
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
-                  <Input
-                    id="password"
-                    type="password"
-                    required
-                    placeholder="Enter your password"
-                    onChange={(e) => setRegister({ ...register, password: e.target.value })}
-                  />
-                  <FieldDescription>Must be at least 8 characters long.</FieldDescription>
-                </Field>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your full name"
+                  required
+                  onChange={(e) => setRegister({ ...register, name: e.target.value })}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="youremail@example.com"
+                  required
+                  onChange={(e) => setRegister({ ...register, email: e.target.value })}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  placeholder="Enter your password"
+                  onChange={(e) => setRegister({ ...register, password: e.target.value })}
+                />
+                <p className="text-sm text-muted-foreground">Must be at least 8 characters long.</p>
+              </div>
 
-                <Field>
-                  <Button type="submit" className="w-full">
-                    Create Account
-                  </Button>
-                  <FieldDescription className="text-center">
-                    Already have an account?
-                    <Link href="/login" className="ml-1 underline underline-offset-4">
-                      Login
-                    </Link>
-                  </FieldDescription>
-                </Field>
-              </FieldGroup>
+              <div className="flex flex-col gap-3">
+                <Button type="submit" className="w-full">
+                  Create Account
+                </Button>
+                <p className="text-center text-sm text-muted-foreground">
+                  Already have an account?{" "}
+                  <Link href="/login" className="underline underline-offset-4 hover:text-primary">
+                    Login
+                  </Link>
+                </p>
+              </div>
             </form>
           </CardContent>
         </Card>
 
-        <FieldDescription className="px-2 text-center">
-          By clicking continue, you agree to our <Link href="#">Terms of Service</Link> and{" "}
-          <Link href="#">privacy policy</Link>
-        </FieldDescription>
+        <p className="px-2 text-center text-sm text-muted-foreground">
+          By clicking continue, you agree to our{" "}
+          <Link href="#" className="underline underline-offset-4 hover:text-primary">Terms of Service</Link>{" "}and{" "}
+          <Link href="#" className="underline underline-offset-4 hover:text-primary">privacy policy</Link>
+        </p>
       </div>
     </div>
   );
