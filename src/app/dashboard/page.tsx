@@ -18,7 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getAllAlbums } from "@/services/authServices";
+import { getAllAlbums } from "@/services/albumServices";
 import type { Album } from "@/types";
 
 function StatCard({

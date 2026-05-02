@@ -37,7 +37,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { getAllAlbums, deleteAlbum } from "@/services/authServices";
+import { getAllAlbums, deleteAlbum } from "@/services/albumServices";
 import type { Album } from "@/types";
 import { apiMessage } from "@/lib/utils";
 
@@ -172,7 +172,10 @@ export default function AlbumsPage() {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         className="flex items-center gap-2 text-destructive focus:text-destructive"
-                        onClick={() => setConfirmId(album.id)}
+                        onSelect={(e) => {
+                          e.preventDefault();
+                          setConfirmId(album.id);
+                        }}
                       >
                         <Trash2 className="h-4 w-4" /> Delete
                       </DropdownMenuItem>
@@ -225,7 +228,7 @@ export default function AlbumsPage() {
               This action cannot be undone. The album and all its settings will be permanently deleted.
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="gap-2 sm:gap-0">
+          <DialogFooter className="gap-10 sm:gap-0">
             <Button variant="outline" onClick={() => setConfirmId(null)}>
               Cancel
             </Button>
@@ -233,7 +236,7 @@ export default function AlbumsPage() {
               variant="destructive"
               disabled={deletingId === confirmId}
               onClick={() => confirmId && handleDelete(confirmId)}
-            >
+            > 
               {deletingId === confirmId ? "Deleting…" : "Delete Album"}
             </Button>
           </DialogFooter>

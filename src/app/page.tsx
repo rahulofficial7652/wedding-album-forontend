@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Heart, ShieldCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ModeToggle } from "@/components/ui/modetoggle";
 
 const features = [
   {
@@ -28,6 +29,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <p className="text-sm font-semibold tracking-wide">Wedding Album Suite</p>
           <div className="flex items-center gap-2">
+            <ModeToggle/>
             <Button variant="ghost" asChild>
               <Link href="/login">Log in</Link>
             </Button>
